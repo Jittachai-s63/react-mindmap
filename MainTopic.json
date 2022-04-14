@@ -1,0 +1,183 @@
+{
+  "rootTopicKey": "c9bded98-7a8c-47f0-b1af-d6b37674c06b",
+  "editorRootTopicKey": "c9bded98-7a8c-47f0-b1af-d6b37674c06b",
+  "focusKey": "12acaa97-60d1-4255-a206-6130191f6197",
+  "extData": {},
+  "topics": [
+    {
+      "key": "35c51b71-e822-49bb-87dc-a6c8f4e7b9e1",
+      "parentKey": "c9bded98-7a8c-47f0-b1af-d6b37674c06b",
+      "subKeys": [
+        "409564ee-7cc0-4c0a-9a2a-95f324495b1c",
+        "1d32c0fc-86f6-42eb-8cad-909629604b23"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [{ "type": "CONTENT", "data": "Subtopic_2" }]
+    },
+    {
+      "key": "ccbb6b7f-a186-4f17-b679-390405adf8c3",
+      "parentKey": "71619458-4b5b-47dd-a010-157af4503492",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [{ "type": "CONTENT", "data": "Detail_3.2" }]
+    },
+    {
+      "key": "3512b8f7-838a-4869-8112-6203f9cae95a",
+      "parentKey": "169669cb-3a0f-4a8e-8bbc-82f614c47610",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [{ "type": "CONTENT", "data": "Detail_1.2" }]
+    },
+    {
+      "key": "169669cb-3a0f-4a8e-8bbc-82f614c47610",
+      "parentKey": "c9bded98-7a8c-47f0-b1af-d6b37674c06b",
+      "subKeys": [
+        "1b615c7f-5cca-41cb-a9cb-3267b4b74f62",
+        "3512b8f7-838a-4869-8112-6203f9cae95a"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [{ "type": "CONTENT", "data": "Subtopic_1" }]
+    },
+    {
+      "key": "a01568da-248c-4db0-bd40-14b3cf88864f",
+      "parentKey": "71619458-4b5b-47dd-a010-157af4503492",
+      "subKeys": [
+        "2a6b7844-cc53-4ffb-89a1-e0ce1a1cb7bb",
+        "ed186ccd-f5a4-4629-91b4-57b20c8e2b97"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [{ "type": "CONTENT", "data": "Detail_3.1" }]
+    },
+    {
+      "key": "12acaa97-60d1-4255-a206-6130191f6197",
+      "parentKey": "409564ee-7cc0-4c0a-9a2a-95f324495b1c",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [{ "type": "CONTENT", "data": "Subdetail_2.1.1" }]
+    },
+    {
+      "key": "ed186ccd-f5a4-4629-91b4-57b20c8e2b97",
+      "parentKey": "a01568da-248c-4db0-bd40-14b3cf88864f",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [{ "type": "CONTENT", "data": "Subdetail_3.1.2" }]
+    },
+    {
+      "key": "c9bded98-7a8c-47f0-b1af-d6b37674c06b",
+      "parentKey": null,
+      "subKeys": [
+        "169669cb-3a0f-4a8e-8bbc-82f614c47610",
+        "35c51b71-e822-49bb-87dc-a6c8f4e7b9e1",
+        "71619458-4b5b-47dd-a010-157af4503492"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [{ "type": "CONTENT", "data": "MainTopic" }]
+    },
+    {
+      "key": "409564ee-7cc0-4c0a-9a2a-95f324495b1c",
+      "parentKey": "35c51b71-e822-49bb-87dc-a6c8f4e7b9e1",
+      "subKeys": ["12acaa97-60d1-4255-a206-6130191f6197"],
+      "collapse": false,
+      "style": null,
+      "blocks": [{ "type": "CONTENT", "data": "Detail_2.1" }]
+    },
+    {
+      "key": "1b615c7f-5cca-41cb-a9cb-3267b4b74f62",
+      "parentKey": "169669cb-3a0f-4a8e-8bbc-82f614c47610",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [{ "type": "CONTENT", "data": "Detail_1.1" }]
+    },
+    {
+      "key": "71619458-4b5b-47dd-a010-157af4503492",
+      "parentKey": "c9bded98-7a8c-47f0-b1af-d6b37674c06b",
+      "subKeys": [
+        "a01568da-248c-4db0-bd40-14b3cf88864f",
+        "ccbb6b7f-a186-4f17-b679-390405adf8c3"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [{ "type": "CONTENT", "data": "Subtopic_3" }]
+    },
+    {
+      "key": "1d32c0fc-86f6-42eb-8cad-909629604b23",
+      "parentKey": "35c51b71-e822-49bb-87dc-a6c8f4e7b9e1",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [{ "type": "CONTENT", "data": "Detail_2.2" }]
+    },
+    {
+      "key": "2a6b7844-cc53-4ffb-89a1-e0ce1a1cb7bb",
+      "parentKey": "a01568da-248c-4db0-bd40-14b3cf88864f",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [{ "type": "CONTENT", "data": "Subdetail_3.1.1" }]
+    }
+  ],
+  "config": {
+    "readOnly": false,
+    "allowUndo": true,
+    "layoutDir": 2,
+    "theme": {
+      "name": "default",
+      "randomColor": true,
+      "background": "rgb(57,60,65)",
+      "highlightColor": "#50C9CE",
+      "marginH": 60,
+      "marginV": 20,
+      "contentStyle": { "lineHeight": "1.5" },
+      "linkStyle": { "lineRadius": 5, "lineType": "curve", "lineWidth": "3px" },
+      "rootTopic": {
+        "contentStyle": {
+          "fontSize": "34px",
+          "borderRadius": "35px",
+          "padding": "16px 18px 16px 18px"
+        },
+        "subLinkStyle": {
+          "lineType": "curve",
+          "lineWidth": "3px",
+          "lineColor": "rgb(113, 203, 45)"
+        }
+      },
+      "primaryTopic": {
+        "contentStyle": {
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "borderRadius": "20px",
+          "fontSize": "17px",
+          "padding": "11px 15px 10px 15px"
+        },
+        "subLinkStyle": {
+          "lineType": "curve",
+          "lineWidth": "3px",
+          "lineColor": "rgb(113, 203, 45)"
+        }
+      },
+      "normalTopic": {
+        "contentStyle": {
+          "border": "1px solid #e8eaec",
+          "borderRadius": "20px",
+          "fontSize": "17px",
+          "padding": "4px 10px"
+        },
+        "subLinkStyle": {
+          "lineType": "curve",
+          "lineWidth": "3px",
+          "lineColor": "white"
+        }
+      }
+    }
+  },
+  "formatVersion": "0.0"
+}
