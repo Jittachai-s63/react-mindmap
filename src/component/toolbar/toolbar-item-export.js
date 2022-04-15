@@ -2,9 +2,11 @@ import cx from "classnames";
 import { iconClassName } from "@blink-mind/renderer-react";
 import { Menu, MenuDivider, MenuItem, Popover } from "@blueprintjs/core";
 import React from "react";
+import pptxgen from "pptxgenjs";
 import { downloadFile } from "../../utils";
 
 export function ToolbarItemExport(props) {
+  let pres = new pptxgen();
   const onClickExportJson = (e) => {
     const { diagram } = props;
     const diagramProps = diagram.getDiagramProps();
@@ -20,24 +22,41 @@ export function ToolbarItemExport(props) {
     downloadFile(url, `${title}.json`);
   };
 
-  const test = (cur, Allnode, loc) => {
+  const DFS = (cur, Allnode, loc) => {
     if (cur.child.length == 0) {
       return;
     } else {
-      console.log(cur.topic);
+      let slide = pres.addSlide();
+      slide.addText(cur.topic, {
+        x: 1.5,
+        y: 1.5,
+        color: "363636",
+        fill: { color: "F1F1F1" },
+        align: pres.AlignH.center,
+      });
+      //console.log(cur.topic);
+      let text = [];
       for (let i = 0; i < cur.child.length; i++) {
         let next = cur.child[i];
         for (let j = 0; j < Allnode.length; j++) {
           if (next == Allnode[j].key) {
-            console.log(Allnode[j].topic);
+            //console.log(Allnode[j].topic);
+            text.push(Allnode[j].topic);
           }
         }
       }
+      slide.addText(text.toString(), {
+        x: 1.5,
+        y: 2.5,
+        color: "363636",
+        fill: { color: "F1F1F1" },
+        align: pres.AlignH.center,
+      });
       for (let i = 0; i < cur.child.length; i++) {
         let next = cur.child[i];
         for (let j = 0; j < Allnode.length; j++) {
           if (next == Allnode[j].key) {
-            test(Allnode[j], Allnode, j);
+            DFS(Allnode[j], Allnode, j);
           }
         }
       }
@@ -69,8 +88,16 @@ export function ToolbarItemExport(props) {
         Allnode.push(temp);
       }
     }
-    console.log(Root.topic);
-    test(Root, Allnode, 0);
+    let slide = pres.addSlide();
+    slide.addText(Root.topic, {
+      x: 1.5,
+      y: 1.5,
+      color: "363636",
+      fill: { color: "F1F1F1" },
+      align: pres.AlignH.center,
+    });
+    DFS(Root, Allnode, 0);
+    pres.writeFile({ fileName: Root.topic + ".pptx" });
   };
 
   return (
