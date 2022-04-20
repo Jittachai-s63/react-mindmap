@@ -41,11 +41,11 @@ export function ToolbarItemExport(props) {
         let next = cur.child[i];
         for (let j = 0; j < Allnode.length; j++) {
           if (next == Allnode[j].key) {
-            if (Allnode[j].topic.length > 800){
+            if (Allnode[j].topic.length > 800) {
               text.push(Allnode[j].topic.replaceAll("\n", "").substring(800));
 
               let subslide = pres.addSlide();
-              subslide.addText(cur.topic+"(ต่อ)", {
+              subslide.addText(cur.topic + "(ต่อ)", {
                 x: 1.5,
                 y: 0.5,
                 fontSize: 20,
@@ -53,7 +53,7 @@ export function ToolbarItemExport(props) {
                 color: "363636",
                 align: pres.AlignH.top,
               });
-              subslide.addText(text.toString().replaceAll("," , "\n"), {
+              subslide.addText(text.toString().replaceAll(",", "\n"), {
                 x: 1.5,
                 y: 2.5,
                 color: "363636",
@@ -61,18 +61,18 @@ export function ToolbarItemExport(props) {
                 softBreakBefore: true,
               });
               text = [];
-              text.push(Allnode[j].topic.replaceAll("\n", "").substring(0,800));
+              text.push(Allnode[j].topic.replaceAll("\n", "").substring(0, 800));
 
               DFS(Allnode[j], Allnode, j);
             }
-            else{
+            else {
               text.push(Allnode[j].topic.replaceAll("\n", ""));
               DFS(Allnode[j], Allnode, j);
             }
           }
         }
       }
-      slide.addText(text.toString().replaceAll("," , "\n"), {
+      slide.addText(text.slice(0,9).toString().replaceAll(",", "\n"), {
         x: 1.5,
         y: 2.5,
         color: "363636",
@@ -80,6 +80,25 @@ export function ToolbarItemExport(props) {
         bullet: true,
         softBreakBefore: true,
       });
+      if (text.length > 9) {
+        let subslide = pres.addSlide();
+        subslide.addText(cur.topic + "(ต่อ)", {
+          x: 1.5,
+          y: 0.5,
+          fontSize: 20,
+          bold: true,
+          color: "363636",
+          align: pres.AlignH.top,
+        });
+        subslide.addText(text.slice(9).toString().replaceAll(",", "\n"), {
+          x: 1.5,
+          y: 2.5,
+          color: "363636",
+          align: pres.AlignH.left,
+          bullet: true,
+          softBreakBefore: true,
+        });
+      }
     }
   };
 
@@ -111,7 +130,7 @@ export function ToolbarItemExport(props) {
     let slide = pres.addSlide();
     slide.addText(Root.topic, {
       x: 1.5,
-      y: 1.5,
+      y: 2.5,
       color: "363636",
       fill: { color: "F1F1F1" },
       align: pres.AlignH.center,
