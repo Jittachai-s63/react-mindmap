@@ -33,7 +33,6 @@ export function ToolbarItemExport(props) {
         fontSize: 20,
         bold: true,
         color: "363636",
-        fill: { color: "F1F1F1" },
         align: pres.AlignH.top,
       });
       //console.log(cur.topic);
@@ -42,17 +41,16 @@ export function ToolbarItemExport(props) {
         let next = cur.child[i];
         for (let j = 0; j < Allnode.length; j++) {
           if (next == Allnode[j].key) {
-            text.push(Allnode[j].topic.replace(/(\r\n|\n|\r)/gm, ""));
+            text.push(Allnode[j].topic.replaceAll("\n", ""));
             console.log(text);
             DFS(Allnode[j], Allnode, j);
           }
         }
       }
-      slide.addText(text.toString().replace("," , ""), {
+      slide.addText(text.toString().replaceAll("," , "\n"), {
         x: 1.5,
         y: 2.5,
         color: "363636",
-        fill: { color: "F1F1F1" },
         align: pres.AlignH.left,
         bullet: true,
         softBreakBefore: true,
