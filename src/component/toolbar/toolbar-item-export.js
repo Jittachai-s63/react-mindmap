@@ -140,7 +140,7 @@ export function ToolbarItemExport(props) {
   };
 
   return (
-    <div className={cx("bm-toolbar-item", iconClassName("export"))}>
+    <div className={cx("bm-toolbar-item", iconClassName("export"))} title="Export">
       <Popover enforceFocus={false}>
         <div className="bm-toolbar-popover-target" />
         <Menu>

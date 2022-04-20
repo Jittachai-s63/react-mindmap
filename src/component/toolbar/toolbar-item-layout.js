@@ -1,7 +1,7 @@
 import React from "react";
 import { DiagramLayoutType } from "@blink-mind/core";
 import cx from "classnames";
-import { Icon, iconClassName } from "@blink-mind/renderer-react";
+import { Icon, iconClassName, Title } from "@blink-mind/renderer-react";
 import { Menu, MenuItem, Popover } from "@blueprintjs/core";
 
 export function ToolbarItemLayout(props) {
@@ -24,7 +24,7 @@ export function ToolbarItemLayout(props) {
 
   return (
     <div
-      className={cx("bm-toolbar-item", iconClassName("layout-left-and-right"))}
+      className={cx("bm-toolbar-item", iconClassName("layout-left-and-right"))} title="Layout"
     >
       <Popover enforceFocus={false}>
         <div className="bm-toolbar-popover-target" />

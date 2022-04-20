@@ -24,7 +24,7 @@ export function ToolbarItemTheme(props) {
   ];
 
   return (
-    <div className={cx("bm-toolbar-item", iconClassName("theme"))}>
+    <div className={cx("bm-toolbar-item", iconClassName("theme"))} title="Theme">
       <Popover enforceFocus={false}>
         <div className="bm-toolbar-popover-target" />
         <div className="bm-popover-theme">

@@ -29,6 +29,7 @@ export class Toolbar extends React.PureComponent {
           className={cx("bm-toolbar-item", iconClassName("undo"), {
             "bm-toolbar-item-disabled": !canUndo,
           })}
+          title="Undo"
           onClick={onClickUndo}
         />
 
@@ -36,6 +37,7 @@ export class Toolbar extends React.PureComponent {
           className={cx("bm-toolbar-item", iconClassName("redo"), {
             "bm-toolbar-item-disabled": !canRedo,
           })}
+          title="Redo"
           onClick={onClickRedo}
         />
 
