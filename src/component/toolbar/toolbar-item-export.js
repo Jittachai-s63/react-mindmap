@@ -22,17 +22,19 @@ export function ToolbarItemExport(props) {
     downloadFile(url, `${title}.json`);
   };
 
-  const DFS = (cur, Allnode, loc) => {
+  const DFS = async (cur, Allnode, loc) => {
     if (cur.child.length == 0) {
       return;
     } else {
       let slide = pres.addSlide();
       slide.addText(cur.topic, {
         x: 1.5,
-        y: 1.5,
+        y: 0.5,
+        fontSize: 20,
+        bold: true,
         color: "363636",
         fill: { color: "F1F1F1" },
-        align: pres.AlignH.center,
+        align: pres.AlignH.top,
       });
       //console.log(cur.topic);
       let text = [];
@@ -40,26 +42,21 @@ export function ToolbarItemExport(props) {
         let next = cur.child[i];
         for (let j = 0; j < Allnode.length; j++) {
           if (next == Allnode[j].key) {
-            //console.log(Allnode[j].topic);
-            text.push(Allnode[j].topic);
-          }
-        }
-      }
-      slide.addText(text.toString(), {
-        x: 1.5,
-        y: 2.5,
-        color: "363636",
-        fill: { color: "F1F1F1" },
-        align: pres.AlignH.center,
-      });
-      for (let i = 0; i < cur.child.length; i++) {
-        let next = cur.child[i];
-        for (let j = 0; j < Allnode.length; j++) {
-          if (next == Allnode[j].key) {
+            text.push(Allnode[j].topic.replace(/(\r\n|\n|\r)/gm, ""));
+            console.log(text);
             DFS(Allnode[j], Allnode, j);
           }
         }
       }
+      slide.addText(text.toString().replace("," , ""), {
+        x: 1.5,
+        y: 2.5,
+        color: "363636",
+        fill: { color: "F1F1F1" },
+        align: pres.AlignH.left,
+        bullet: true,
+        softBreakBefore: true,
+      });
     }
   };
 
@@ -100,6 +97,34 @@ export function ToolbarItemExport(props) {
     pres.writeFile({ fileName: Root.topic + ".pptx" });
   };
 
+  const onClicktest = (e) => {
+    let pptx = new pptxgen();
+    pptx.layout = "LAYOUT_WIDE";
+    
+    pptx.defineSlideMaster({
+          title: "PLACEHOLDER_SLIDE",
+          background: { color: "FFFFFF" },
+          objects: [
+              { rect: { x: 0, y: 0, w: "100%", h: 0.75, fill: { color: "F1F1F1" } } },
+              { text: { text: "Status Report", options: { x: 0, y: 0, w: 6, h: 0.75 } } },
+              {
+                  placeholder: {
+                      options: { name: "body", type: "body", x: 0.6, y: 1.5, w: 12, h: 5.25 },
+                      text: "(custom placeholder text!)",
+                  },
+              },
+          ],
+          slideNumber: { x: 0.3, y: "95%" },
+      });
+      
+      let slide = pptx.addSlide({ masterName: "PLACEHOLDER_SLIDE" });
+      
+      // Add text, charts, etc. to any placeholder using its `name`
+      slide.addText("Body Placeholder here!", { placeholder: "body" });
+      
+      pptx.writeFile();
+  };
+
   return (
     <div className={cx("bm-toolbar-item", iconClassName("export"))}>
       <Popover enforceFocus={false}>
@@ -109,6 +134,7 @@ export function ToolbarItemExport(props) {
           <MenuItem text="IMAGE(.pdf)" />
           <MenuDivider />
           <MenuItem text="SLIDE(.pptx)" onClick={onClickExportSlide} />
+          <MenuItem text="test" onClick={onClicktest} />
         </Menu>
       </Popover>
     </div>
