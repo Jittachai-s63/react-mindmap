@@ -15,8 +15,8 @@ export function generateSimpleModel() {
     topics: [
       {
         key: rootKey,
-        blocks: [{ type: "CONTENT", data: "MainTopic" }]
-      }
-    ]
+        blocks: [{ type: "CONTENT", data: "MainTopic" }],
+      },
+    ],
   });
 }

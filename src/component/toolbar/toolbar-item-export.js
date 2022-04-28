@@ -23,9 +23,11 @@ export function ToolbarItemExport(props) {
   };
 
   const DFS = async (cur, Allnode, loc) => {
+    //retuen when it is a leaf
     if (cur.child.length == 0) {
       return;
     } else {
+      // add root to title slide
       let slide = pres.addSlide();
       slide.addText(cur.topic, {
         x: 1.5,
@@ -35,15 +37,17 @@ export function ToolbarItemExport(props) {
         color: "363636",
         align: pres.AlignH.top,
       });
-      //console.log(cur.topic);
+
       let text = [];
       for (let i = 0; i < cur.child.length; i++) {
         let next = cur.child[i];
+        //find child in list
         for (let j = 0; j < Allnode.length; j++) {
           if (next == Allnode[j].key) {
+            //text is more than 800
             if (Allnode[j].topic.length > 800) {
               text.push(Allnode[j].topic.replaceAll("\n", "").substring(800));
-
+              // create another slide to add text
               let subslide = pres.addSlide();
               subslide.addText(cur.topic + "(ต่อ)", {
                 x: 1.5,
@@ -60,26 +64,36 @@ export function ToolbarItemExport(props) {
                 align: pres.AlignH.left,
                 softBreakBefore: true,
               });
-              text = [];
-              text.push(Allnode[j].topic.replaceAll("\n", "").substring(0, 800));
 
-              DFS(Allnode[j], Allnode, j);
-            }
-            else {
+              text = [];
+              text.push(
+                Allnode[j].topic.replaceAll("\n", "").substring(0, 800)
+              );
+            } else {
+              //text is less than 800
               text.push(Allnode[j].topic.replaceAll("\n", ""));
-              DFS(Allnode[j], Allnode, j);
             }
+            //Depth-first search
+            DFS(Allnode[j], Allnode, j);
           }
         }
       }
-      slide.addText(text.slice(0,9).toString().replaceAll(",", "\n"), {
-        x: 1.5,
-        y: 2.5,
-        color: "363636",
-        align: pres.AlignH.left,
-        bullet: true,
-        softBreakBefore: true,
-      });
+      //add text to detail slide
+      slide.addText(
+        text
+          .slice(0, 9)
+          .toString()
+          .replaceAll(",", "\n"),
+        {
+          x: 1.5,
+          y: 2.5,
+          color: "363636",
+          align: pres.AlignH.left,
+          bullet: true,
+          softBreakBefore: true,
+        }
+      );
+      //create another slide to add text when have more then 9 topic
       if (text.length > 9) {
         let subslide = pres.addSlide();
         subslide.addText(cur.topic + "(ต่อ)", {
@@ -90,14 +104,20 @@ export function ToolbarItemExport(props) {
           color: "363636",
           align: pres.AlignH.top,
         });
-        subslide.addText(text.slice(9).toString().replaceAll(",", "\n"), {
-          x: 1.5,
-          y: 2.5,
-          color: "363636",
-          align: pres.AlignH.left,
-          bullet: true,
-          softBreakBefore: true,
-        });
+        subslide.addText(
+          text
+            .slice(9)
+            .toString()
+            .replaceAll(",", "\n"),
+          {
+            x: 1.5,
+            y: 2.5,
+            color: "363636",
+            align: pres.AlignH.left,
+            bullet: true,
+            softBreakBefore: true,
+          }
+        );
       }
     }
   };
@@ -113,13 +133,16 @@ export function ToolbarItemExport(props) {
     let Allnode = [];
 
     let Root = { topic: "", child: [] };
+
     for (let i = 0; i < data.length; i++) {
       let Node = JSON.stringify(data[i]);
       Node = JSON.parse(Node);
+      // find root node
       if (data[i].parentKey == null) {
         Root.topic = Node.blocks[0].data;
         Root.child = Node.subKeys;
       } else {
+        // add another node in list
         let temp = { topic: "", child: [], key: "" };
         temp.topic = Node.blocks[0].data;
         temp.child = Node.subKeys;
@@ -127,6 +150,7 @@ export function ToolbarItemExport(props) {
         Allnode.push(temp);
       }
     }
+    //create first slide
     let slide = pres.addSlide();
     slide.addText(Root.topic, {
       x: 1.5,
@@ -135,12 +159,20 @@ export function ToolbarItemExport(props) {
       fill: { color: "F1F1F1" },
       align: pres.AlignH.center,
     });
+    //Depth-first search
     DFS(Root, Allnode, 0);
     pres.writeFile({ fileName: Root.topic + ".pptx" });
   };
 
+  const test = () => {
+    console.log("hi");
+  };
+
   return (
-    <div className={cx("bm-toolbar-item", iconClassName("export"))} title="Export">
+    <div
+      className={cx("bm-toolbar-item", iconClassName("export"))}
+      title="Export"
+    >
       <Popover enforceFocus={false}>
         <div className="bm-toolbar-popover-target" />
         <Menu>
