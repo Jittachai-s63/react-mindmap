@@ -1,16 +1,17 @@
 import {
   Presentation, Slide, Text,
-  Shape, Image, Line, render
+  Shape, Image, Line
 } from "react-pptx";
 
 import Preview from "react-pptx/preview";
-import React from "react";
+import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
-
-export default function Present() {
+export default function Present(props) {
+  let location = useLocation();
+  console.log(location.state)
+  
   return (
-
-
       <Preview>
         <Presentation>
           <Slide>

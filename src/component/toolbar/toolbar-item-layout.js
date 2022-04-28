@@ -1,7 +1,7 @@
 import React from "react";
 import { DiagramLayoutType } from "@blink-mind/core";
 import cx from "classnames";
-import { Icon, iconClassName, Title } from "@blink-mind/renderer-react";
+import { Icon, iconClassName } from "@blink-mind/renderer-react";
 import { Menu, MenuItem, Popover } from "@blueprintjs/core";
 
 export function ToolbarItemLayout(props) {

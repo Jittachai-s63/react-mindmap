@@ -24,7 +24,7 @@ export function ToolbarItemExport(props) {
 
   const DFS = async (cur, Allnode, loc) => {
     //retuen when it is a leaf
-    if (cur.child.length == 0) {
+    if (cur.child.length === 0) {
       return;
     } else {
       // add root to title slide
@@ -43,7 +43,7 @@ export function ToolbarItemExport(props) {
         let next = cur.child[i];
         //find child in list
         for (let j = 0; j < Allnode.length; j++) {
-          if (next == Allnode[j].key) {
+          if (next === Allnode[j].key) {
             //text is more than 800
             if (Allnode[j].topic.length > 800) {
               text.push(Allnode[j].topic.replaceAll("\n", "").substring(800));
@@ -162,10 +162,7 @@ export function ToolbarItemExport(props) {
     //Depth-first search
     DFS(Root, Allnode, 0);
     pres.writeFile({ fileName: Root.topic + ".pptx" });
-  };
-
-  const test = () => {
-    console.log("hi");
+    console.log(props)
   };
 
   return (

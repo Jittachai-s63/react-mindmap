@@ -8,9 +8,9 @@ import { TopicReferencePlugin, SearchPlugin } from "@blink-mind/plugins";
 import { Toolbar } from "./toolbar/toolbar";
 import { generateSimpleModel } from "../utils";
 import "@blink-mind/renderer-react/lib/main.css";
-import debug from "debug";
 
-const log = debug("app");
+// import debug from "debug";
+// const log = debug("app");
 
 const plugins = [
   RichTextEditorPlugin(),
