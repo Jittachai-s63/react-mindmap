@@ -7,6 +7,7 @@ import { ToolbarItemLayout } from "./toolbar-item-layout";
 import { ToolbarItemTheme } from "./toolbar-item-theme";
 import { ToolbarItemExport } from "./toolbar-item-export";
 import { ToolbarItemSearch } from "./toolbar-item-search";
+import { ToolbarItemPresent } from "./toolbar-item-present";
 
 // import debug from "debug";
 // const log = debug("app");
@@ -25,6 +26,7 @@ export class Toolbar extends React.PureComponent {
         <ToolbarItemLayout {...props} />
         <ToolbarItemSearch {...props} />
 
+
         <div
           className={cx("bm-toolbar-item", iconClassName("undo"), {
             "bm-toolbar-item-disabled": !canUndo,
@@ -41,7 +43,8 @@ export class Toolbar extends React.PureComponent {
           onClick={onClickRedo}
         />
 
-        <div></div>
+        <ToolbarItemPresent {...props} />
+        
       </div>
     );
   }
