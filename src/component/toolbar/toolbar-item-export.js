@@ -155,7 +155,7 @@ export function ToolbarItemExport(props) {
     slide.addText(Root.topic, {
       x: 1.5,
       y: 2.5,
-      color: "363636",
+      color: "#363636",
       fill: { color: "F1F1F1" },
       align: pres.AlignH.center,
     });
