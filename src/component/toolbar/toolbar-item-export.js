@@ -162,7 +162,6 @@ export function ToolbarItemExport(props) {
     //Depth-first search
     DFS(Root, Allnode, 0);
     pres.writeFile({ fileName: Root.topic + ".pptx" });
-    console.log(props)
   };
 
   return (

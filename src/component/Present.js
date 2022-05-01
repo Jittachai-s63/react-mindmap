@@ -1,58 +1,52 @@
-import {
-  Presentation, Slide, Text,
-  Shape, Image, Line
-} from "react-pptx";
+import { Presentation, Slide, Text, Shape, Image, Line } from "react-pptx";
 
 import Preview from "react-pptx/preview";
 import React, { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { DragScrollWidget } from "@blink-mind/renderer-react";
 
 export default function Present(props) {
-  let location = useLocation();
-  console.log(location.state)
-  
+  let data = useLocation().state;
+  console.log(data.Root);
+
+  const DFS = async (cur, Allnode) => {
+    if (cur.child.length === 0) {
+      return;
+    } else {
+      let text = [];
+      for (let i = 0; i < cur.child.length; i++) {
+        let next = cur.child[i];
+        for (let j = 0; j < Allnode.length; j++) {
+          if (next === Allnode[j].key) {
+            text.push(Allnode[j].topic.replaceAll("\n", ""));
+            DFS(Allnode[j], Allnode, j);
+          }
+        }
+      }
+      console.log(cur.topic);
+      console.log(text);
+    }
+  };
+
+  DFS(data.Root, data.Allnode);
+
   return (
+    <div>
       <Preview>
         <Presentation>
-          <Slide>
-            <Text style={{
-              x: 3, y: 1, w: 3, h: 0.5, fontSize: 32, bold: true
-            }}>
-              Hello there!
-            </Text>
-            <Shape
-              type="rect"
+          <Slide style={{ backgroundColor: "#FFCC66" }}>
+            <Text
               style={{
-                x: 3, y: 1.55, w: 3, h: 0.1,
-                backgroundColor: "#FF0000"
+                x: 3,
+                y: 1,
+                w: 3,
+                h: 0.5,
+                fontSize: 32,
+                bold: true,
               }}
-            />
-            <Text style={{
-              x: 2, y: 2.8, w: 6, h: 0.5, fontSize: 16
-            }}>
-              <Text.Link url="https://github.com/wyozi/react-pptx">
-                here's a link
-              </Text.Link> to the repository
-              or a
-              <Text.Link
-                url="https://www.youtube.com/watch?v=6IqKEeRS90A"
-                style={{
-                  color: "orange"
-                }}
-              >
-                video
-              </Text.Link>, if you'd like.
+            >
+              {data.Root.topic}
             </Text>
-            <Line
-              x1={1}
-              x2={9}
-              y1={5}
-              y2={5}
-              style={{
-                color: 'blue',
-                width: 2
-              }}
-            />
           </Slide>
           <Slide style={{ backgroundColor: "#DDDDDD" }}>
             <Text style={{ x: 3, y: 1, w: 3, h: 0.5, fontSize: 32 }}>
@@ -66,11 +60,14 @@ export default function Present(props) {
           </Slide>
           <Slide>
             <Image
-              src={{ kind: "path", path: "https://source.unsplash.com/random/800x600" }}
+              src={{
+                kind: "path",
+                path: "https://source.unsplash.com/random/800x600",
+              }}
               style={{ x: "10%", y: "10%", w: "80%", h: "80%" }}
             />
           </Slide>
-          {[1, 2, 3].map(n => (
+          {[1, 2, 3].map((n) => (
             <Slide key={n}>
               <Text style={{ x: "50%", y: "50%", w: 1, h: 0.2 }}>
                 slide {n}
@@ -78,7 +75,7 @@ export default function Present(props) {
             </Slide>
           ))}
           <>
-            {[1, 2, 3].map(n => (
+            {[1, 2, 3].map((n) => (
               <Slide key={n}>
                 <Text style={{ x: "50%", y: "50%", w: 1, h: 0.2 }}>
                   fragment slide {n}
@@ -88,7 +85,6 @@ export default function Present(props) {
           </>
         </Presentation>
       </Preview>
-
-    
-  )
+    </div>
+  );
 }

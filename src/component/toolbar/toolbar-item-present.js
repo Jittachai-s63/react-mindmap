@@ -2,24 +2,45 @@ import cx from "classnames";
 import { iconClassName } from "@blink-mind/renderer-react";
 import React from "react";
 
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate, Link } from "react-router-dom";
 
 export function ToolbarItemPresent(props) {
-  let navigate = useNavigate()
-  console.log(props)
+  const { diagram } = props;
+  const diagramProps = diagram.getDiagramProps();
+  const { controller } = diagramProps;
 
-  function  onClickPreviewSlide() {
-    console.log(props) 
+  const json = controller.run("serializeModel", diagramProps);
+  const data = json.topics;
 
-    navigate("/present", { state : props } )
-    
+  let Allnode = [];
+
+  let Root = { topic: "", child: [] };
+
+  for (let i = 0; i < data.length; i++) {
+    let Node = JSON.stringify(data[i]);
+    Node = JSON.parse(Node);
+    // find root node
+    if (data[i].parentKey == null) {
+      Root.topic = Node.blocks[0].data;
+      Root.child = Node.subKeys;
+    } else {
+      // add another node in list
+      let temp = { topic: "", child: [], key: "" };
+      temp.topic = Node.blocks[0].data;
+      temp.child = Node.subKeys;
+      temp.key = Node.key;
+      Allnode.push(temp);
+    }
   }
 
+  console.log(Root);
+  console.log(Allnode);
   return (
-    <div 
-    className={cx("bm-toolbar-item", iconClassName("export"))} 
-    title="Present"
-    onClick= {() => {onClickPreviewSlide()} }
-    />
+    <Link to="/present" state={{ Root: Root, Allnode: Allnode }}>
+      <div
+        className={cx("bm-toolbar-item", iconClassName("export"))}
+        title="Present"
+      ></div>
+    </Link>
   );
 }

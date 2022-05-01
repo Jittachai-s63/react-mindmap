@@ -2,7 +2,7 @@ import React from "react";
 import Mindmap from "./component/mindmap";
 import Present from "./component/Present";
 import "./App.css";
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 function App() {
   return (
     <Router>
@@ -11,7 +11,7 @@ function App() {
         <Route path="/present" element={<Present />} />
       </Routes>
     </Router>
-  )
+  );
 }
 
 export default App;
