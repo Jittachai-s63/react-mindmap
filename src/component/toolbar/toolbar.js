@@ -8,6 +8,7 @@ import { ToolbarItemTheme } from "./toolbar-item-theme";
 import { ToolbarItemExport } from "./toolbar-item-export";
 import { ToolbarItemSearch } from "./toolbar-item-search";
 import { ToolbarItemPresent } from "./toolbar-item-present";
+import  PictureCapture  from "./toolbar-item-capture";
 
 // import debug from "debug";
 // const log = debug("app");
@@ -25,6 +26,8 @@ export class Toolbar extends React.PureComponent {
         <ToolbarItemTheme {...props} />
         <ToolbarItemLayout {...props} />
         <ToolbarItemSearch {...props} />
+        <PictureCapture/>
+        
 
 
         <div
