@@ -198,9 +198,8 @@ export default function Present(props) {
 
   return (
     <div>
-
-      <button onClick={prevslide} className="scroll-to-left">prev</button>
-      <button onClick={nextslide} className="scroll-to-top">next</button>
+      <div onClick={prevslide} className="Back-button"/>
+      <div onClick={nextslide} className="Next-button"/>
       <div>
         
         <div ref={topic}>

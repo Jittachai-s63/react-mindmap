@@ -72,7 +72,6 @@ export class Mindmap extends React.Component {
       diagram: this.diagram,
       onClickUndo: this.onClickUndo,
       onClickRedo: this.onClickRedo,
-      onClickCapture: this.onClickCpature,
       canUndo,
       canRedo
     };

@@ -10,26 +10,19 @@
   height: 100%;
 }
 
-.scroll-to-top {
+.Next-button {
   position: fixed;
-  bottom: 12px;
+  top: 1;
   left: 50%;
-  width: 40px;
-  height: 40px;
-  border-radius: 100%;
-  background: #8b0000;
-  color: #fff;
+  width: 50%;
+  height: 100%;
   z-index: 1;
 }
 
-.scroll-to-left {
+.Back-button {
   position: fixed;
-  bottom: 12px;
-  left: 40%;
-  width: 40px;
-  height: 40px;
-  border-radius: 100%;
-  background: #8b0000;
-  color: #fff;
+  bottom: 1;
+  width: 50%;
+  height: 100%;
   z-index: 1;
 }
