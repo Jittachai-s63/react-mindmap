@@ -2,33 +2,41 @@ import { Presentation, Slide, Text, Shape } from "react-pptx";
 import Preview from "react-pptx/preview";
 import React, { useRef, useState, useEffect, createRef } from "react";
 
-
 export default function Present(props) {
   let data = JSON.parse(localStorage.getItem("present"));
-
-
+  const temp = [];
+  var k = 0;
   var slidearray = [];
 
-  const slidesection = useRef(null)
-  const gotoslide = () => {
+  const topic = useRef(null)
 
-    window.scrollTo({
-      top: slidesection.current.offsetTop,
-
-    })
+  const prevslide = async () => {
+    if (k <= 0) {
+      window.scrollTo({
+        top: topic.current.offsetTop,
+      })
+    } else {
+      k--
+      window.scrollTo({
+        top: temp[k].current.offsetTop,
+      })
+      
+      console.log(k)
+    }
   }
 
-  // const arrLength = slidearray.length;
-  // const [elRefs, setElRefs] = useState([]);
+  const nextslide = () => {
 
-  // React.useEffect(() => {
-  //   // add or remove refs
-  //   setElRefs((elRefs) =>
-  //     Array(arrLength)
-  //       .fill()
-  //       .map((_, i) => elRefs[i] || createRef()),
-  //   );
-  // }, [arrLength]);
+    if (k >= slidearray.length) {
+      return
+    } else {
+      window.scrollTo({
+        top: temp[k].current.offsetTop,
+      })
+      k++
+      console.log(k)
+    }
+  }
 
   const DFS = async (cur, Allnode, loc) => {
     if (cur.child.length === 0) {
@@ -37,33 +45,35 @@ export default function Present(props) {
       let manytext = false;
       let manybullet;
       let curslide = (
-        <Preview>
-          <Presentation>
-            <Slide >
-              <Text
-                style={{
-                  x: 1,
-                  y: 0.5,
-                  w: 3,
-                  color: "#363636",
-                  fill: { color: "F1F1F1" },
-                }}
-              >
-                {cur.topic}
-              </Text>
-              <Text style={{ x: 1, y: 1, w: 7, h: 0.5, fontSize: 14 }}>
-                {findchile()}
-              </Text>
-              <Shape
-                type="rect"
-                style={{
-                  x: 0, y: 0, w: 10, h: 0.01,
-                  backgroundColor: "black"
-                }}
-              />
-            </Slide>
-          </Presentation>
-        </Preview>
+        <div >
+          <Preview>
+            <Presentation>
+              <Slide >
+                <Text
+                  style={{
+                    x: 1,
+                    y: 0.5,
+                    w: 3,
+                    color: "#363636",
+                    fill: { color: "F1F1F1" },
+                  }}
+                >
+                  {cur.topic}
+                </Text>
+                <Text style={{ x: 1, y: 1, w: 7, h: 0.5, fontSize: 14 }}>
+                  {findchile()}
+                </Text>
+                <Shape
+                  type="rect"
+                  style={{
+                    x: 0, y: 0, w: 10, h: 0.01,
+                    backgroundColor: "black"
+                  }}
+                />
+              </Slide>
+            </Presentation>
+          </Preview>
+        </div>
       );
       function findchile() {
         let text = [];
@@ -93,7 +103,7 @@ export default function Present(props) {
       slidearray.push(curslide);
       if (manytext) {
         slidearray.push(
-          <div ref={slidesection} >
+          <div>
             <Preview>
               <Presentation>
                 <Slide>
@@ -126,10 +136,10 @@ export default function Present(props) {
       }
       if (manybullet) {
         slidearray.push(
-          <div ref={slidesection} >
+          <div>
             <Preview>
               <Presentation>
-                <Slide style={{ backgroundColor: "#DDDDDD" }}>
+                <Slide>
                   <Text
                     style={{
                       x: 1,
@@ -146,6 +156,13 @@ export default function Present(props) {
                       <Text.Bullet key={n}>{n}</Text.Bullet>
                     ))}
                   </Text>
+                  <Shape
+                    type="rect"
+                    style={{
+                      x: 0, y: 0, w: 10, h: 0.01,
+                      backgroundColor: "black"
+                    }}
+                  />
                 </Slide>
               </Presentation>
             </Preview>
@@ -161,40 +178,59 @@ export default function Present(props) {
         }
       }
     }
+    if (slidearray) {
+      wfff()
+    }
   };
 
   DFS(data.Root, data.Allnode);
-  
+
+  function wfff() {
+    var lada = []
+    slidearray.map((x, i) => {
+      lada[i] = createRef()
+      lada = temp
+    })
+    lada[0] = createRef()
+  }
+
+
+
   return (
     <div>
-      <button onClick={gotoslide} >asdasd</button>
-      <Preview>
-        <Presentation>
-          <Slide>
 
-            <Text
-              style={{
-                x: 2.5,
-                y: 2.5,
-                w: 5,
-                color: "#363636",
-                fill: { color: "F1F1F1" },
-                align: "center",
-              }}
-            >
-              {data.Root.topic}
-            </Text>
-          </Slide>
-        </Presentation>
-      </Preview>
-      {/* <div>
-        {slidearray.map((el, i) => (
-          <div ref={elRefs[i]}>
-            {el}
-          </div>
-        ))}
-      </div> */}
-      {slidearray}
+      <button onClick={prevslide} className="scroll-to-left">prev</button>
+      <button onClick={nextslide} className="scroll-to-top">next</button>
+      <div>
+        
+        <div ref={topic}>
+          <Preview>
+            <Presentation>
+              <Slide>
+                <Text
+                  style={{
+                    x: 2.5,
+                    y: 2.5,
+                    w: 5,
+                    color: "#363636",
+                    fill: { color: "F1F1F1" },
+                    align: "center",
+                  }}
+                >
+                  {data.Root.topic}
+                </Text>
+              </Slide>
+            </Presentation>
+          </Preview>
+        </div>
+        <div>
+          {slidearray.map((x, i) => (
+            <div ref={temp[i]}>
+              {x}
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
