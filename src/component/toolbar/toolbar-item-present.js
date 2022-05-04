@@ -1,14 +1,16 @@
 import cx from "classnames";
 import { iconClassName } from "@blink-mind/renderer-react";
 import React from "react";
-
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export function ToolbarItemPresent(props) {
   let Allnode = [];
   let Root = { topic: "", child: [] };
 
   const getData = () => {
+    Allnode = [];
+    Root = { topic: "", child: [] };
+
     const { diagram } = props;
     const diagramProps = diagram.getDiagramProps();
     const { controller } = diagramProps;

@@ -21,6 +21,7 @@
     "react-pptx": "^2.14.1",
     "react-router-dom": "^6.3.0",
     "react-screen-capture": "^1.0.1",
+    "react-use": "^17.3.2",
     "styled-components": "^4.4.1"
   },
   "devDependencies": {
