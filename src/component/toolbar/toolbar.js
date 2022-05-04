@@ -9,6 +9,7 @@ import { ToolbarItemExport } from "./toolbar-item-export";
 import { ToolbarItemSearch } from "./toolbar-item-search";
 import { ToolbarItemPresent } from "./toolbar-item-present";
 import  PictureCapture  from "./toolbar-item-capture";
+import Capture from "../icon/capture.png"
 
 // import debug from "debug";
 // const log = debug("app");
@@ -17,16 +18,16 @@ export class Toolbar extends React.PureComponent {
   render() {
     const props = this.props;
 
-    const { onClickUndo, onClickRedo, canUndo, canRedo } = props;
+    const { onClickUndo, onClickRedo, canUndo, canRedo,} = props;
 
     return (
-      <div className="bm-toolbar">
+      <div className="bm-toolbar" style={{position: "abosolute", }}>
         <ToolbarItemOpen {...props} />
         <ToolbarItemExport {...props} />
         <ToolbarItemTheme {...props} />
         <ToolbarItemLayout {...props} />
         <ToolbarItemSearch {...props} />
-        <PictureCapture/>
+        <ToolbarItemPresent {...props} />
         
 
 
@@ -45,9 +46,8 @@ export class Toolbar extends React.PureComponent {
           title="Redo"
           onClick={onClickRedo}
         />
-
-        <ToolbarItemPresent {...props} />
-        
+    
+      
       </div>
     );
   }

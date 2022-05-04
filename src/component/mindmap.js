@@ -8,6 +8,8 @@ import { TopicReferencePlugin, SearchPlugin } from "@blink-mind/plugins";
 import { Toolbar } from "./toolbar/toolbar";
 import { generateSimpleModel } from "../utils";
 import "@blink-mind/renderer-react/lib/main.css";
+import { ScreenCapture } from 'react-screen-capture';
+import Capture from "./icon/capture.png"
 
 // import debug from "debug";
 // const log = debug("app");
@@ -70,6 +72,7 @@ export class Mindmap extends React.Component {
       diagram: this.diagram,
       onClickUndo: this.onClickUndo,
       onClickRedo: this.onClickRedo,
+      onClickCapture: this.onClickCpature,
       canUndo,
       canRedo
     };
@@ -85,12 +88,40 @@ export class Mindmap extends React.Component {
     );
   };
 
+  handleScreenCapture = async (screenCapture) => {
+    this.setState({screenCapture});
+    const screenCaptureSource = await this.state.screenCapture;
+    const downloadLink = document.createElement('a');
+    const fileName = 'react-screen-capture.png';
+
+    downloadLink.href = screenCaptureSource;
+    downloadLink.download = fileName;
+    downloadLink.click();
+  };
+
   render() {
-    return (
-      <div className="mindmap">
-        {this.diagram && this.renderToolbar()}
-        {this.renderDiagram()}
-      </div>
+    return (  
+    <ScreenCapture onEndCapture={this.handleScreenCapture}>
+      {({ onStartCapture }) => (
+        <div className="mindmap">
+          <img
+          src = {Capture}
+          style = {
+            {
+              position: "absolute",
+              left: "320px",
+              top: "5px",
+              width : "30px"
+            }
+          }
+          title = "Capture"
+          onClick={onStartCapture}  
+          />
+          {this.diagram && this.renderToolbar()}
+          {this.renderDiagram()}  
+        </div>
+      )}
+      </ScreenCapture>
     );
   }
 }

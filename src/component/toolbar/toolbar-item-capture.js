@@ -21,7 +21,6 @@ class PictureCapture extends React.Component {
 
   render() {
     const { screenCapture } = this.state;
-    console.log(screenCapture);
     return (
       <ScreenCapture onEndCapture={this.handleScreenCapture}>
         {({ onStartCapture }) => (
