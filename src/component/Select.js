@@ -16,11 +16,12 @@ export default function Select(props) {
     setCheckedState(updatedCheckedState);
   };
 
+  let checklist = [];
   for (let i = 0; i < Root.child.length; i++) {
     let next = Root.child[i];
     for (let j = 0; j < Allnode.length; j++) {
       if (next === Allnode[j].key) {
-        Root.child[i] = Allnode[j].topic;
+        checklist.push(Allnode[j].topic);
         break;
       }
     }
@@ -100,19 +101,25 @@ export default function Select(props) {
         title: "PLACEHOLDER_SLIDE",
         background: { color: "FFFFFF" },
         objects: [
-            {
-                placeholder: {
-                    options: { name: "body", type: "body", x: 1.5, y: 1.0, w: 12, h: 5.25,
-                    fontSize: 18,
-                    color: "363636",
-                    align: pres.AlignH.left,
-                    bullet: true,
-                    softBreakBefore: true,
-                  },
-                    
-                    text: "(custom placeholder text!)",
-                },
+          {
+            placeholder: {
+              options: {
+                name: "body",
+                type: "body",
+                x: 1.5,
+                y: 1.0,
+                w: 12,
+                h: 5.25,
+                fontSize: 18,
+                color: "363636",
+                align: pres.AlignH.left,
+                bullet: true,
+                softBreakBefore: true,
+              },
+
+              text: "(custom placeholder text!)",
             },
+          },
         ],
       });
       if (text.length > 9) {
@@ -132,7 +139,6 @@ export default function Select(props) {
             .replaceAll(",", "\n"),
           {
             placeholder: "body",
-            
           }
         );
       }
@@ -144,16 +150,6 @@ export default function Select(props) {
   );
 
   const createslide = () => {
-    for (let i = 0; i < Root.child.length; i++) {
-      let next = Root.child[i];
-      for (let j = 0; j < Allnode.length; j++) {
-        if (next === Allnode[j].topic) {
-          Root.child[i] = Allnode[j].key;
-          break;
-        }
-      }
-    }
-
     let slide = pres.addSlide();
     slide.addText(Root.topic, {
       x: 1.5,
@@ -185,15 +181,6 @@ export default function Select(props) {
       }
     }
     Root.child = temp;
-    for (let i = 0; i < Root.child.length; i++) {
-      let next = Root.child[i];
-      for (let j = 0; j < Allnode.length; j++) {
-        if (next === Allnode[j].topic) {
-          Root.child[i] = Allnode[j].key;
-          break;
-        }
-      }
-    }
   };
 
   return (
@@ -201,7 +188,7 @@ export default function Select(props) {
       <h1>Select export slide</h1>
       <h2>{Root.topic}</h2>
       <ul className="slide-list">
-        {Root.child.map((topic, index) => {
+        {checklist.map((topic, index) => {
           return (
             <li key={index}>
               <div className="toppings-list-item">
@@ -223,12 +210,19 @@ export default function Select(props) {
       </ul>
       <div>
         <button onClick={exportsecelcslide}>Export</button>
-        <Link to="/present"
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={() => localStorage.setItem('present', JSON.stringify({ Root: Root, Allnode: Allnode }))}
-        state={{ Root: Root, Allnode: Allnode }}>
-        <button onClick={previewslide}>Preview</button>
+        <Link
+          to="/present"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() =>
+            localStorage.setItem(
+              "present",
+              JSON.stringify({ Root: Root, Allnode: Allnode })
+            )
+          }
+          state={{ Root: Root, Allnode: Allnode }}
+        >
+          <button onClick={previewslide}>Preview</button>
         </Link>
       </div>
     </div>
