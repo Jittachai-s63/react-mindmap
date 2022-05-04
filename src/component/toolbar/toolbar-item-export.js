@@ -4,6 +4,10 @@ import { Menu, MenuDivider, MenuItem, Popover } from "@blueprintjs/core";
 import React from "react";
 import pptxgen from "pptxgenjs";
 import { downloadFile } from "../../utils";
+import Popup from "reactjs-popup"
+import Content from "./Content.js";
+import "./modal.css";
+
 
 export function ToolbarItemExport(props) {
   let pres = new pptxgen();
@@ -175,7 +179,9 @@ export function ToolbarItemExport(props) {
           <MenuItem text="JSON(.json)" onClick={onClickExportJson} />
           <MenuItem text="IMAGE(.pdf)" />
           <MenuDivider />
-          <MenuItem text="SLIDE(.pptx)" onClick={onClickExportSlide} />
+          <Popup modal trigger={<MenuItem text="SLIDE(.pptx)"/>}>
+            {close => < Content close={close} /> }
+          </Popup>
         </Menu>
       </Popover>
     </div>

@@ -22,6 +22,7 @@
     "react-router-dom": "^6.3.0",
     "react-screen-capture": "^1.0.1",
     "react-use": "^17.3.2",
+    "reactjs-popup": "^2.0.5",
     "styled-components": "^4.4.1"
   },
   "devDependencies": {
