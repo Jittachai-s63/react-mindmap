@@ -1,5 +1,6 @@
 import pptxgen from "pptxgenjs";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Select(props) {
   let pres = new pptxgen();
@@ -176,6 +177,25 @@ export default function Select(props) {
     createslide();
   };
 
+  const previewslide = () => {
+    let temp = [];
+    for (let i = 0; i < Root.child.length; i++) {
+      if (checkedState[i] == true) {
+        temp.push(Root.child[i]);
+      }
+    }
+    Root.child = temp;
+    for (let i = 0; i < Root.child.length; i++) {
+      let next = Root.child[i];
+      for (let j = 0; j < Allnode.length; j++) {
+        if (next === Allnode[j].topic) {
+          Root.child[i] = Allnode[j].key;
+          break;
+        }
+      }
+    }
+  };
+
   return (
     <div>
       <h1>Select export slide</h1>
@@ -203,6 +223,13 @@ export default function Select(props) {
       </ul>
       <div>
         <button onClick={exportsecelcslide}>Export</button>
+        <Link to="/present"
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => localStorage.setItem('present', JSON.stringify({ Root: Root, Allnode: Allnode }))}
+        state={{ Root: Root, Allnode: Allnode }}>
+        <button onClick={previewslide}>Preview</button>
+        </Link>
       </div>
     </div>
   );
