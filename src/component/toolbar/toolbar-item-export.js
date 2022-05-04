@@ -4,13 +4,15 @@ import { Menu, MenuDivider, MenuItem, Popover } from "@blueprintjs/core";
 import React from "react";
 import pptxgen from "pptxgenjs";
 import { downloadFile } from "../../utils";
-import Popup from "reactjs-popup"
-import Content from "./Content.js";
+import Popup from "reactjs-popup";
+import { Link } from "react-router-dom";
 import "./modal.css";
-
 
 export function ToolbarItemExport(props) {
   let pres = new pptxgen();
+  let Allnode = [];
+  let Root = { topic: "", child: [] };
+
   const onClickExportJson = (e) => {
     const { diagram } = props;
     const diagramProps = diagram.getDiagramProps();
@@ -126,6 +128,32 @@ export function ToolbarItemExport(props) {
     }
   };
 
+  const getdata = () => {
+    const { diagram } = props;
+    const diagramProps = diagram.getDiagramProps();
+    const { controller } = diagramProps;
+
+    const json = controller.run("serializeModel", diagramProps);
+    const data = json.topics;
+
+    for (let i = 0; i < data.length; i++) {
+      let Node = JSON.stringify(data[i]);
+      Node = JSON.parse(Node);
+      // find root node
+      if (data[i].parentKey == null) {
+        Root.topic = Node.blocks[0].data;
+        Root.child = Node.subKeys;
+      } else {
+        // add another node in list
+        let temp = { topic: "", child: [], key: "" };
+        temp.topic = Node.blocks[0].data;
+        temp.child = Node.subKeys;
+        temp.key = Node.key;
+        Allnode.push(temp);
+      }
+    }
+  };
+
   const onClickExportSlide = (e) => {
     const { diagram } = props;
     const diagramProps = diagram.getDiagramProps();
@@ -134,9 +162,9 @@ export function ToolbarItemExport(props) {
     const json = controller.run("serializeModel", diagramProps);
     const data = json.topics;
 
-    let Allnode = [];
+    Allnode = [];
 
-    let Root = { topic: "", child: [] };
+    Root = { topic: "", child: [] };
 
     for (let i = 0; i < data.length; i++) {
       let Node = JSON.stringify(data[i]);
@@ -164,7 +192,7 @@ export function ToolbarItemExport(props) {
       align: pres.AlignH.center,
     });
     //Depth-first search
-    DFS(Root, Allnode, 0);
+    DFS(Root, Allnode);
     pres.writeFile({ fileName: Root.topic + ".pptx" });
   };
 
@@ -179,9 +207,19 @@ export function ToolbarItemExport(props) {
           <MenuItem text="JSON(.json)" onClick={onClickExportJson} />
           <MenuItem text="IMAGE(.pdf)" />
           <MenuDivider />
-          <Popup modal trigger={<MenuItem text="SLIDE(.pptx)"/>}>
-            {close => < Content close={close} /> }
-          </Popup>
+          <Link
+            to="/selectpresent"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() =>
+              localStorage.setItem(
+                "selectpresent",
+                JSON.stringify({ Root: Root, Allnode: Allnode })
+              )
+            }
+          >
+            <MenuItem text="SLIDE(.pptx)" onClick={getdata} />
+          </Link>
         </Menu>
       </Popover>
     </div>
