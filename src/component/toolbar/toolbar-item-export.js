@@ -100,8 +100,27 @@ export function ToolbarItemExport(props) {
         }
       );
       //create another slide to add text when have more then 9 topic
+      pres.defineSlideMaster({
+        title: "PLACEHOLDER_SLIDE",
+        background: { color: "FFFFFF" },
+        objects: [
+            {
+                placeholder: {
+                    options: { name: "body", type: "body", x: 1.5, y: 1.0, w: 12, h: 5.25,
+                    fontSize: 18,
+                    color: "363636",
+                    align: pres.AlignH.left,
+                    bullet: true,
+                    softBreakBefore: true,
+                  },
+                    
+                    text: "(custom placeholder text!)",
+                },
+            },
+        ],
+      });
       if (text.length > 9) {
-        let subslide = pres.addSlide();
+        let subslide = pres.addSlide({ masterName: "PLACEHOLDER_SLIDE" });
         subslide.addText(cur.topic + "(ต่อ)", {
           x: 1.5,
           y: 0.5,
@@ -116,12 +135,8 @@ export function ToolbarItemExport(props) {
             .toString()
             .replaceAll(",", "\n"),
           {
-            x: 1.5,
-            y: 2.5,
-            color: "363636",
-            align: pres.AlignH.left,
-            bullet: true,
-            softBreakBefore: true,
+            placeholder: "body",
+            
           }
         );
       }
