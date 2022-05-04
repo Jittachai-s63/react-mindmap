@@ -27,7 +27,7 @@ export default function Select(props) {
     }
   }
 
-  const DFS = async (cur, Allnode, loc) => {
+  const DFS = async (cur, Allnode) => {
     if (cur.child.length === 0) {
       return;
     } else {
@@ -77,7 +77,7 @@ export default function Select(props) {
               text.push(Allnode[j].topic.replaceAll("\n", ""));
             }
             //Depth-first search
-            DFS(Allnode[j], Allnode, j);
+            DFS(Allnode[j], Allnode);
           }
         }
       }

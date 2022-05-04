@@ -29,6 +29,7 @@ export function ToolbarItemExport(props) {
   };
 
   const getdata = () => {
+    Alldata = [];
     const { diagram } = props;
     const diagramProps = diagram.getDiagramProps();
     const { controller } = diagramProps;
