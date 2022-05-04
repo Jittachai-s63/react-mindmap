@@ -29,7 +29,7 @@ export function ToolbarItemExport(props) {
   };
 
   const getdata = () => {
-    Alldata = [];
+    Allnode = [];
     const { diagram } = props;
     const diagramProps = diagram.getDiagramProps();
     const { controller } = diagramProps;
